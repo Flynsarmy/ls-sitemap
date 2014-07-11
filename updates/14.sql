@@ -1,0 +1,1 @@
+ALTER TABLE `pages` add column `sitemap_priority` double default 0.7 after `sitemap_visible`;
