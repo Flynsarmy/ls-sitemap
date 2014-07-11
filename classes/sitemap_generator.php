@@ -40,7 +40,7 @@
 						$page_url = site_url($page->url);
 						if(substr($page_url, -1) != '/') $page_url .= '/';
 
-						$this->add_url_element($page_url,  date('c', strtotime($page->updated_at?$page->updated_at:$page->created_at)), 'weekly', $page->sitemap_priority);
+						$this->add_url_element($page_url,  date('c', strtotime($page->updated_at?$page->updated_at:$page->created_at)), $page->sitemap_changefreq, $page->sitemap_priority);
 					}
 				}
 

@@ -9,6 +9,16 @@
 	public $form_redirect = null;
 	public $form_edit_save_flash = 'Sitemap configuration has been saved.';
 
+	public static $CHANGE_FREQS = array(
+		'always' => 'Always',
+		'hourly' => 'Hourly',
+		'daily' => 'Daily',
+		'weekly' => 'Weekly',
+		'monthly' => 'Monthly',
+		'yearly' => 'Yearly',
+		'never' => 'Never',
+	);
+
  	public function __construct() {
 		parent::__construct();
 
@@ -51,14 +61,19 @@
 			foreach($page_list as $id=>$page) {
 				$visible = isset($_POST['pages'][$page->id]['sitemap_visible']);
 				$priority = doubleval($_POST['pages'][$page->id]['sitemap_priority']);
+				$changefreq = $_POST['pages'][$page->id]['sitemap_changefreq'];
 
 				Db_DbHelper::query("
 					update pages
-					set sitemap_visible=:visible, sitemap_priority=:priority
+					set
+						sitemap_visible=:visible,
+						sitemap_priority=:priority,
+						sitemap_changefreq=:changefreq
 					where id=:id
 				", array(
 					'visible' => $visible,
 					'priority' => $priority,
+					'changefreq' => $changefreq,
 					'id' => $page->id
 				));
 			}

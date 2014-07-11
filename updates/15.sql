@@ -1,0 +1,1 @@
+ALTER TABLE `pages` add column `sitemap_changefreq` varchar(255) default 'daily' after `sitemap_priority`;

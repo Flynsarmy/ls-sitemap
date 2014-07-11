@@ -7,6 +7,7 @@
 				<th>Page Title</th>
 				<th>Page URL</th>
 				<th>Priority</th>
+				<th>Change Frequency</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,6 +18,13 @@
 					<td><label class="choice" for="pages_<?= $page->id ?>"><?= $page->title ?></label></td>
 					<td><label class="choice" for="pages_<?= $page->id ?>"><?= $page->url ?></label></td>
 					<td><input type="text" value="<?= $page->sitemap_priority ?>" name="pages[<?= $page->id ?>][sitemap_priority]" id="pages_<?= $page->id ?>_priority"></td>
+					<td>
+						<select name="pages[<?= $page->id ?>][sitemap_changefreq]" id="pages_<?= $page->id ?>_changefreq">
+							<?php foreach ( Sitemap_Config::$CHANGE_FREQS as $key => $val ):
+								?><option value="<?= h($key) ?>" <?= Phpr_Form::optionState($key, $page->sitemap_changefreq) ?>><?= $val ?></option><?php
+							endforeach; ?>
+						</select>
+					</td>
 				</tr>
 			<? endforeach ?>
 		</tbody>
